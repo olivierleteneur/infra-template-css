@@ -1,0 +1,74 @@
+/* 
+ * Fondations CSS éco-conçues.
+ * Le typage via les variables facilite la maintenance sans processeur externe.
+ */
+
+:root {
+    /* Palette minimaliste et proportions de base */
+    --color-bg: #fdfdfd;
+    --color-text: #1a1a1a;
+    --color-primary: #2c5282;
+    --color-focus: #e53e3e;
+    
+    /* Polices système uniquement : pas de téléchargement de webfonts */
+    --font-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    
+    --spacing-base: 1rem;
+    --max-width: 800px;
+}
+
+/* Bascule automatique et économique en mode sombre */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #1a1a1a;
+        --color-text: #fdfdfd;
+        --color-primary: #90cdf4;
+    }
+}
+
+/* Reset robuste : contrôle du modèle de boîte et purge des marges par défaut */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: var(--font-base);
+    font-size: 100%;
+    line-height: 1.5;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    /* Défilement fluide conditionné au choix de l'utilisateur */
+    scroll-behavior: smooth;
+}
+
+/* Respect des paramètres d'accessibilité (réduction des animations) */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+body {
+    /* Largeur maximale contrainte pour préserver le confort de lecture (50-75 caractères par ligne) */
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--spacing-base);
+    /* Lissage du texte minimal pour écrans modernes */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Accessibilité : indication de focus stricte pour la navigation au clavier */
+:focus-visible {
+    outline: 2px dashed var(--color-focus);
+    outline-offset: 4px;
+}
+
+/* Images responsives par défaut */
+img, picture, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
